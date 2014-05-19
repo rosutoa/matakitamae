@@ -1,0 +1,53 @@
+//グローバル変数
+float X,Y;
+float Cx=100, Cy=100;
+float Angle = 0;
+float R = 50;
+int c = 0;
+
+
+//初期化
+void setup(){
+   size(200,200);
+   colorMode(HSB,100);
+   background(19);
+   frameRate(30);
+}
+
+
+void draw(){
+   //関数呼び出し
+   fade();
+
+   //角度を10度ずつ増加させる
+   Angle = Angle + 10;
+
+   //角度を度からラジアンに変換させる
+   X = Cx + ( R * cos(radians(Angle)) );
+   Y = Cy + ( R * -sin(radians(Angle)) );
+
+   //cが99になるとリセットする
+   if(c >= 99){
+      c = 0;
+   }
+
+   //色（HSB）
+   c = c + 3;
+
+   noStroke();
+   //1周ごとに色変化
+   fill(c,99,99);
+
+   //図形を描く
+   rectMode(CENTER);
+   rect(X, Y, 10, 10);
+}
+
+
+//画面リセット用の関数
+void fade(){
+   noStroke();
+   fill(99,30);
+   rectMode(CORNER);
+   rect(0, 0, 200, 200);
+}
